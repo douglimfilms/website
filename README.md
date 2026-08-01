@@ -70,3 +70,5 @@ Static one-page site for a documentary-style, multi-camera wedding videography s
 
 ## Deployment
 Static site — no backend needed. Netlify Drop, Vercel, or GitHub Pages all work. Just make sure all files in this folder stay together (video/poster are referenced by relative path).
+
+**The `deploy/` folder (sibling to this one, not `field-coverage-site/` itself) is a git repo pushed to `github.com/douglimfilms/website`.** `field-coverage-site/` is the working/source folder — it also has raw source `.mov` footage (~400MB, never deployed) and a `backups/` folder, so it was deliberately kept out of git. The established workflow: edit files in `field-coverage-site/`, copy the changed ones to `deploy/`, then from `deploy/` run `git add -A && git commit -m "..."` and `git push`. Auth is via a GitHub Personal Access Token (not a password — the account uses Google sign-in for the web UI, which is separate from git's HTTPS auth). Netlify/Vercel auto-deploy from this repo hasn't been set up yet — still deploying manually via Netlify Drop as of this note; connecting the GitHub repo to Netlify/Vercel would enable auto-deploy on every push and is a natural next step.
