@@ -937,6 +937,30 @@
       item.box.classList.toggle('playing', isPlaying);
     }
 
+    // Seeking a real video file isn't instant — setting `currentTime` and
+    // calling `.play()` back-to-back can start playback before the seek
+    // actually lands, so it visibly plays from wherever it already was
+    // (usually near 0) instead of the intended position. Waiting for the
+    // real `seeked` event before playing fixes that; a short fallback
+    // timeout covers the (rare) case where `seeked` doesn't fire, e.g. the
+    // target position is already close enough that no seek is needed.
+    function seekAndPlay(video, pos) {
+      if (Math.abs(video.currentTime - pos) < 0.05) {
+        video.play().catch(() => {});
+        return;
+      }
+      let started = false;
+      function go() {
+        if (started) return;
+        started = true;
+        video.removeEventListener('seeked', go);
+        video.play().catch(() => {});
+      }
+      video.addEventListener('seeked', go);
+      video.currentTime = pos;
+      setTimeout(go, 500);
+    }
+
     items.forEach(item => {
       item.playBtn.addEventListener('click', () => {
         if (!item.video.paused) {
@@ -953,8 +977,7 @@
             other.video.pause();
           }
         });
-        item.video.currentTime = pos;
-        item.video.play().catch(() => {});
+        seekAndPlay(item.video, pos);
       });
 
       item.video.addEventListener('play', () => setIcon(item, true));
