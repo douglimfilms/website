@@ -617,7 +617,7 @@
       <div class="wa-boxes">
         <div class="wa-box" data-source="onboard">
           <div class="video-embed">
-            <video playsinline preload="auto" poster="ab-poster.jpg">
+            <video playsinline preload="metadata" poster="ab-poster.jpg">
               <source src="ab-onboard.mp4" type="video/mp4">
               <source src="ab-onboard.webm" type="video/webm">
             </video>
@@ -629,7 +629,7 @@
         </div>
         <div class="wa-box" data-source="lav">
           <div class="video-embed">
-            <video playsinline preload="auto" poster="ab-poster.jpg">
+            <video playsinline preload="metadata" poster="ab-poster.jpg">
               <source src="ab-lav.mp4" type="video/mp4">
               <source src="ab-lav.webm" type="video/webm">
             </video>
@@ -944,17 +944,29 @@
     // real `seeked` event before playing fixes that; a short fallback
     // timeout covers the (rare) case where `seeked` doesn't fire, e.g. the
     // target position is already close enough that no seek is needed.
-    function seekAndPlay(video, pos) {
+    //
+    // With several videos on this page competing for decoder resources
+    // (hero + monitor wall autoplaying continuously), a `seeked` event can
+    // fire without the position actually landing — currentTime silently
+    // stays at 0, which looks like the clip "restarting" on switch. Verify
+    // the position actually moved before trusting the event; retry a couple
+    // times if not, instead of playing from the wrong spot.
+    function seekAndPlay(video, pos, attempt) {
+      attempt = attempt || 0;
       if (Math.abs(video.currentTime - pos) < 0.05) {
         video.play().catch(() => {});
         return;
       }
-      let started = false;
+      let settled = false;
       function go() {
-        if (started) return;
-        started = true;
+        if (settled) return;
+        settled = true;
         video.removeEventListener('seeked', go);
-        video.play().catch(() => {});
+        if (Math.abs(video.currentTime - pos) < 0.2 || attempt >= 3) {
+          video.play().catch(() => {});
+        } else {
+          seekAndPlay(video, pos, attempt + 1);
+        }
       }
       video.addEventListener('seeked', go);
       video.currentTime = pos;
