@@ -1,5 +1,8 @@
 name = "website"
 compatibility_date = "2026-08-01"
+main = "src/index.js"
 
 [assets]
 directory = "./"
+binding = "ASSETS"
+run_worker_first = true
