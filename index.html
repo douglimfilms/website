@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doug Lim Films — Wedding Documentation</title>
+<style>
+  :root{
+    --paper: #EFEBE2;
+    --paper-2: #E6E0D2;
+    --ink: #1C1B19;
+    --ink-soft: #4A473F;
+    --line: #CFC7B3;
+    --tally: #B23A2E;
+    --tally-dim: #B23A2E33;
+    --navy: #2B3A45;
+    --white: #FAF8F3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:17px;
+    line-height:1.6;
+  }
+  .mono{
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    letter-spacing:0.02em;
+  }
+  .label{
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--ink-soft);
+  }
+  h1,h2,h3{
+    font-family:Impact, 'Arial Narrow Bold', Haettenschweiler, 'Franklin Gothic Bold', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  .rule{
+    border:none;
+    border-top:1px solid var(--line);
+  }
+
+  /* ===== NAV ===== */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:Impact, 'Arial Narrow Bold', Haettenschweiler, 'Franklin Gothic Bold', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .rec-dot{
+    width:9px; height:9px; border-radius:50%;
+    background:var(--tally);
+    box-shadow:0 0 0 3px var(--tally-dim);
+    animation:pulse 2.2s infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .rec-dot{animation:none;} }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:0.35;}
+  }
+  .navlinks{
+    display:flex; gap:26px;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+  .navlinks a{text-decoration:none; color:var(--ink-soft);}
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--tally);}
+  .nav-location{
+    white-space:nowrap;
+  }
+  @media (max-width:640px){
+    .nav-location{display:none;}
+    nav .wrap{ flex-wrap:wrap; padding-bottom:12px; }
+    .navlinks{
+      flex-basis:100%;
+      flex-wrap:wrap;
+      gap:8px 14px;
+      font-size:11px;
+      margin-top:10px;
+    }
+  }
+
+  /* ===== HERO ===== */
+  header.hero{
+    position:relative;
+    max-width:1080px;
+    margin:24px auto 0;
+    padding:64px 0 48px;
+    overflow:hidden;
+    isolation:isolate;
+    min-height:620px;
+    display:flex;
+    align-items:flex-end;
+    border:1px solid var(--ink);
+  }
+  @media (max-width:1080px){ header.hero{ margin-top:0; border-left:none; border-right:none; } }
+  @media (max-width:480px){ header.hero{ min-height:480px; padding:48px 0 36px; } }
+  .hero-video-layer{
+    position:absolute; inset:0;
+    z-index:0;
+    background:linear-gradient(135deg, var(--navy), #1a242c);
+  }
+  .hero-video-layer video{
+    width:100%; height:100%;
+    object-fit:cover;
+    object-position:center 15%;
+    filter:saturate(0.95) brightness(1);
+  }
+  header.hero .wrap{
+    position:relative;
+    z-index:2;
+  }
+  .hero-card{
+    max-width:560px;
+  }
+  header.hero .hl{
+    text-shadow:
+      0 1px 3px rgba(0,0,0,0.9),
+      0 2px 10px rgba(0,0,0,0.6),
+      0 0 24px rgba(0,0,0,0.4);
+  }
+  header.hero h1 .hl{
+    color:var(--white);
+  }
+  header.hero h1 em.hl,
+  header.hero h1 .hl em{
+    color:#D4A94E;
+  }
+  header.hero .hero-sub .hl{
+    color:#F2EFE7;
+  }
+  header.hero .hero-top .hl{
+    color:#F2EFE7;
+  }
+  header.hero h1,
+  header.hero .hero-sub,
+  header.hero .hero-top{
+    text-shadow:none;
+  }
+  .hero-top{
+    display:flex; align-items:baseline; gap:12px; margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(24px, 3vw, 34px);
+    line-height:1.08;
+  }
+  @media (max-width:480px){ .hero h1{ font-size:16px; } }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--tally);
+  }
+  .hero-sub{
+    margin-top:14px;
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.55;
+  }
+  .btn{
+    display:inline-block;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    text-decoration:none;
+    padding:14px 22px;
+    border:1px solid var(--ink);
+    color:var(--ink);
+    background:transparent;
+    transition:background .15s ease, color .15s ease;
+  }
+  .btn:hover, .btn:focus-visible{background:var(--ink); color:var(--white);}
+  .btn.primary{background:var(--ink); color:var(--white);}
+  .btn.primary:hover, .btn.primary:focus-visible{background:var(--tally); border-color:var(--tally); color:var(--white);}
+
+  /* ===== MONITOR WALL ===== */
+  .wall{
+    margin-top:52px;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:10px;
+  }
+  @media (max-width:760px){ .wall{grid-template-columns:repeat(2, 1fr);} }
+  .cam{
+    position:relative;
+    aspect-ratio:4/3;
+    background:linear-gradient(135deg, var(--navy), #1a242c);
+    overflow:hidden;
+    border:1px solid #10161a;
+  }
+  .cam video{
+    position:absolute; inset:0;
+    z-index:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .cam .aud-wave{
+    position:absolute; inset:0;
+    z-index:0;
+    width:100%; height:100%;
+    display:block;
+  }
+  .cam .tag{
+    position:absolute; top:8px; left:8px;
+    z-index:2;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:11px;
+    color:#EFEBE2;
+    background:rgba(0,0,0,0.35);
+    padding:2px 6px;
+    letter-spacing:0.04em;
+  }
+  .cam .tc{
+    position:absolute; bottom:8px; left:8px;
+    z-index:2;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:11px;
+    color:#EFEBE2CC;
+    text-shadow:0 1px 2px rgba(0,0,0,0.8);
+  }
+  .cam .lvl{
+    position:absolute; bottom:8px; right:8px;
+    z-index:2;
+    display:flex; gap:2px; align-items:flex-end; height:14px;
+  }
+  .cam .lvl span{
+    width:3px; background:#7FBF8F; display:inline-block;
+  }
+
+  /* ===== VIDEO PROOF ===== */
+  .proof{
+    margin-top:52px;
+  }
+  .proof-label{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-bottom:10px;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+  }
+  .proof-label .rec2{
+    display:inline-flex; align-items:center; gap:6px; color:var(--tally);
+  }
+  .proof-label .rec2::before{
+    content:""; width:7px; height:7px; border-radius:50%; background:var(--tally);
+  }
+  .video-embed{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/9;
+    background:#0c1114;
+    border:1px solid var(--ink);
+    overflow:hidden;
+  }
+  .video-embed iframe,
+  .video-embed video{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    border:0;
+    object-fit:cover;
+  }
+  .wa-play{
+    position:absolute; right:8px; bottom:8px;
+    width:34px; height:34px;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(28,27,25,0.75);
+    color:var(--white);
+    border:1px solid rgba(255,255,255,0.4);
+    border-radius:50%;
+    cursor:pointer;
+    z-index:3;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .wa-play:hover, .wa-play:focus-visible{ background:var(--tally); transform:scale(1.05); }
+  .wa-play.playing{ opacity:0.45; }
+  .wa-play.playing:hover, .wa-play.playing:focus-visible{ opacity:1; }
+  .wa-boxes{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
+    max-width:500px;
+    width:100%;
+    margin:0 auto;
+  }
+  .wa-box .video-embed{
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .wa-box.playing .video-embed{
+    border-color:var(--tally);
+    box-shadow:0 0 0 2px var(--tally);
+  }
+  .wa-box-label{
+    margin-top:10px;
+    text-align:center;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    color:var(--ink);
+  }
+  .wa-box.playing .wa-box-label{ color:var(--tally); }
+
+  /* ===== SECTION SPACING ===== */
+  section{padding:64px 0;}
+  section.tight{padding:44px 0;}
+  .eyebrow{
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:20px;
+  }
+  .eyebrow .l{
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.12em;
+    color:var(--ink-soft);
+    white-space:nowrap;
+  }
+  .eyebrow hr{flex:1;}
+
+  /* ===== DIFFERENCE / CALL SHEET ===== */
+  .callsheet{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border:1px solid var(--ink);
+  }
+  @media (max-width:700px){ .callsheet{grid-template-columns:1fr;} }
+  .callsheet > div{padding:28px;}
+  .callsheet .yes{border-right:1px solid var(--ink);}
+  @media (max-width:700px){ .callsheet .yes{border-right:none; border-bottom:1px solid var(--ink);} }
+  .callsheet h3{font-size:15px; margin-bottom:16px;}
+  .callsheet ul{list-style:none;}
+  .callsheet li{
+    padding:8px 0;
+    border-top:1px solid var(--line);
+    font-size:15.5px;
+  }
+  .callsheet li:first-of-type{border-top:none;}
+  .callsheet .yes li::before{content:"— "; color:var(--tally); font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
+  .callsheet .no li::before{content:"— "; color:var(--ink-soft); font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;}
+
+  /* ===== SERVICES ===== */
+  .services{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:14px;
+  }
+  @media (max-width:800px){ .services{grid-template-columns:1fr;} }
+  .svc{
+    border:1px solid var(--line);
+    background:var(--white);
+    padding:26px;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .svc.primary{background:var(--ink); color:var(--white); border-color:var(--ink);}
+  .svc.primary .label{color:#C9C4B4;}
+  .svc h3{font-size:19px;}
+  .svc p{color:var(--ink-soft); font-size:15px;}
+  .svc.primary p{color:#D8D4C8;}
+  .svc .tc-tag{
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:11px;
+    color:var(--tally);
+    margin-top:auto;
+    padding-top:12px;
+  }
+  .svc.primary .tc-tag{color:#E8907F;}
+
+  /* ===== PROCESS ===== */
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+  }
+  @media (max-width:900px){ .steps{grid-template-columns:repeat(2, 1fr);} }
+  @media (max-width:760px){ .steps{grid-template-columns:1fr; gap:32px;} }
+  .step .num{
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:13px;
+    color:var(--tally);
+    margin-bottom:10px;
+  }
+  .step h3{font-size:17px; margin-bottom:8px;}
+  .step p{color:var(--ink-soft); font-size:15px;}
+
+  /* ===== RATES ===== */
+  .rates{border-top:1px solid var(--ink);}
+  .rate-row{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:16px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+    align-items:baseline;
+  }
+  .rate-row .desc h4{
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight:600;
+    font-size:16.5px;
+    text-transform:none;
+    letter-spacing:0;
+    margin-bottom:4px;
+  }
+  .rate-row .desc p{color:var(--ink-soft); font-size:14.5px;}
+  .rate-row .price{
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:16px;
+    white-space:nowrap;
+  }
+  .rates-note{
+    margin-top:16px;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+
+  /* ===== CONTACT / FOOTER ===== */
+  footer{
+    background:var(--ink);
+    color:var(--white);
+    padding:64px 0 32px;
+  }
+  footer h2{color:var(--white); font-size:clamp(26px,4vw,38px); max-width:520px;}
+  footer .sub{color:#B9B5A9; margin-top:14px; max-width:480px; font-size:16px;}
+  .form{
+    margin-top:36px;
+    display:grid;
+    gap:16px;
+    max-width:480px;
+  }
+  .form label{
+    display:block;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:11.5px;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:#B9B5A9;
+    margin-bottom:6px;
+  }
+  .form input, .form select, .form textarea{
+    width:100%;
+    background:transparent;
+    border:none;
+    border-bottom:1px solid #4A473F;
+    color:var(--white);
+    font-family:Georgia, 'Times New Roman', serif;
+    font-size:16px;
+    padding:8px 0;
+  }
+  .form input:focus, .form select:focus, .form textarea:focus{
+    outline:none;
+    border-bottom-color:var(--tally);
+  }
+  .form textarea{resize:vertical; min-height:70px;}
+  .foot-bottom{
+    margin-top:64px;
+    padding-top:24px;
+    border-top:1px solid #3A382F;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:12.5px;
+    color:#8B8778;
+  }
+  .foot-bottom a{text-decoration:none; color:#B9B5A9;}
+  .foot-bottom a:hover{color:var(--tally);}
+
+  /* ===== BACK TO TOP ===== */
+  .back-to-top{
+    position:fixed;
+    right:20px; bottom:20px;
+    z-index:40;
+    width:44px; height:44px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--ink);
+    color:var(--white);
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    opacity:0;
+    transform:translateY(8px);
+    pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease, background .15s ease;
+  }
+  .back-to-top.visible{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+  }
+  .back-to-top:hover, .back-to-top:focus-visible{ background:var(--tally); }
+  @media (max-width:640px){ .back-to-top{ right:14px; bottom:14px; width:40px; height:40px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="rec-dot"></span> DOUG LIM FILMS</div>
+    <div class="navlinks">
+      <a href="#difference">Difference</a>
+      <a href="#services">Services</a>
+      <a href="#proof-speech">Sample</a>
+      <a href="#rates">Rates</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <span class="label mono nav-location">LOS ANGELES, CA</span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-video-layer" aria-hidden="true">
+    <video autoplay muted playsinline preload="auto" poster="ceremony-loop-poster.jpg" id="hero-video">
+      <source src="ceremony-loop.webm" type="video/webm">
+      <source src="ceremony-loop.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-card">
+      <h1><span class="hl">Your ceremony and speeches.</span><br><span class="hl">No performance, <em>authentically you.</em></span></h1>
+      <p class="hero-sub"><span class="hl">High-fidelity audio/video coverage of your day.</span></p>
+    </div>
+  </div>
+</header>
+
+<section id="how-it-looks" class="tight">
+  <div class="wrap">
+    <div class="eyebrow"><span class="l">// THE MULTI-CAM SETUP</span><hr class="rule"></div>
+    <p style="max-width:560px; color:var(--ink-soft); margin:0 auto 24px; text-align:center;">That's real ceremony footage playing silently above — three synced angles, cut together. This is the setup that made it possible:</p>
+    <div class="wall" aria-hidden="true">
+      <div class="cam">
+        <video autoplay muted playsinline preload="auto" class="wall-cam-video">
+          <source src="cam-center.webm" type="video/webm">
+          <source src="cam-center.mp4" type="video/mp4">
+        </video>
+        <span class="tag">CAM A — WIDE</span><span class="tc mono" data-tc>00:00:00:00</span><span class="lvl"><span style="height:60%"></span><span style="height:90%"></span><span style="height:40%"></span></span>
+      </div>
+      <div class="cam">
+        <video autoplay muted playsinline preload="auto" class="wall-cam-video">
+          <source src="cam-bride.webm" type="video/webm">
+          <source src="cam-bride.mp4" type="video/mp4">
+        </video>
+        <span class="tag">CAM B — BRIDE</span><span class="tc mono" data-tc>00:00:00:00</span><span class="lvl"><span style="height:80%"></span><span style="height:30%"></span><span style="height:65%"></span></span>
+      </div>
+      <div class="cam">
+        <video autoplay muted playsinline preload="auto" class="wall-cam-video">
+          <source src="cam-groom.webm" type="video/webm">
+          <source src="cam-groom.mp4" type="video/mp4">
+        </video>
+        <span class="tag">CAM C — GROOM</span><span class="tc mono" data-tc>00:00:00:00</span><span class="lvl"><span style="height:35%"></span><span style="height:70%"></span><span style="height:50%"></span></span>
+      </div>
+      <div class="cam">
+        <canvas class="aud-wave" aria-hidden="true"></canvas>
+        <span class="tag">AUD — LAV</span><span class="tc mono" data-tc>00:00:00:00</span><span class="lvl"><span style="height:95%"></span><span style="height:55%"></span><span style="height:75%"></span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="difference">
+  <div class="wrap">
+    <div class="eyebrow"><span class="l">// THE DIFFERENCE</span><hr class="rule"></div>
+
+    <div>
+      <p class="label" style="margin-bottom:14px;">ON-BOARD MIC VS LAV MIC</p>
+
+      <p style="max-width:560px; color:var(--ink-soft); margin-bottom:16px;">Same moment, two mic sources. Press one to play — the other stops automatically.</p>
+      <!-- Two independent videos, each with real embedded audio (not a
+           muted video + separate <audio> elements) — pressing one pauses
+           the other and carries over its playback position, so switching
+           mid-comparison still lines up on the same moment. Deliberately
+           NOT continuous simultaneous playback: that architecture (tried
+           and rebuilt more than once — see README "Hard-won lessons") kept
+           hitting real-device sync/stutter problems. Only one video is ever
+           actually playing at a time here, which sidesteps that whole class
+           of bug. -->
+      <div class="wa-boxes">
+        <div class="wa-box" data-source="onboard">
+          <div class="video-embed">
+            <video playsinline preload="auto" poster="ab-poster.jpg">
+              <source src="ab-onboard.mp4" type="video/mp4">
+              <source src="ab-onboard.webm" type="video/webm">
+            </video>
+            <button type="button" class="wa-play" aria-label="Play on-board mic">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path class="wa-play-icon" d="M5.5,6 L5.5,18 Q5.5,20 7.2,18.95 L16.8,13.05 Q18.5,12 16.8,10.95 L7.2,5.05 Q5.5,4 5.5,6 Z"/></svg>
+            </button>
+          </div>
+          <p class="wa-box-label">ON-BOARD MIC</p>
+        </div>
+        <div class="wa-box" data-source="lav">
+          <div class="video-embed">
+            <video playsinline preload="auto" poster="ab-poster.jpg">
+              <source src="ab-lav.mp4" type="video/mp4">
+              <source src="ab-lav.webm" type="video/webm">
+            </video>
+            <button type="button" class="wa-play" aria-label="Play lav mic">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true"><path class="wa-play-icon" d="M5.5,6 L5.5,18 Q5.5,20 7.2,18.95 L16.8,13.05 Q18.5,12 16.8,10.95 L7.2,5.05 Q5.5,4 5.5,6 Z"/></svg>
+            </button>
+          </div>
+          <p class="wa-box-label">LAV MIC</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callsheet" style="margin-top:52px;">
+      <div class="yes">
+        <h3 class="mono">WHAT YOU GET</h3>
+        <ul>
+          <li>Every vow, toast, and reading — start to finish</li>
+          <li>Footage that's elegant and timeless</li>
+          <li>Multiple synced camera angles with clean lav mic audio</li>
+          <li>Fast turnaround</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h3 class="mono" style="color:var(--ink-soft)">WHAT YOU DON'T GET</h3>
+        <ul>
+          <li>Staged re-shoots for a better angle</li>
+          <li>Viral TikTok transitions that age fast</li>
+          <li>Shaky cell phone video with muffled audio</li>
+          <li>A six-month wait</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="tight">
+  <div class="wrap">
+    <div class="eyebrow"><span class="l">// WHAT GETS COVERED</span><hr class="rule"></div>
+    <div class="services">
+      <div class="svc primary">
+        <span class="label">CEREMONY COVERAGE</span>
+        <h3>Ceremony</h3>
+        <p>Every vow and reading, start to finish, from 2–4 synced angles with clean lav audio. The full ceremony, in order — not cut down for pacing.</p>
+        <span class="tc-tag mono">→ 2–4 CAM · LAV AUDIO</span>
+      </div>
+      <div class="svc">
+        <span class="label">ADD-ON</span>
+        <h3>First Dance &amp; Reception Moments</h3>
+        <p>Optional add-on coverage for first dance, parent dances, or a toast that runs later in the reception.</p>
+        <span class="tc-tag mono">→ ADD TO ANY BOOKING</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proof-speech" class="tight">
+  <div class="wrap">
+    <div class="eyebrow"><span class="l">// SPEECHES &amp; TOASTS</span><hr class="rule"></div>
+    <div class="proof-label">
+      <span class="rec2">LIVE CUT — MAID OF HONOR SPEECH</span>
+      <span>DIRECT AUDIO FEED</span>
+    </div>
+    <div class="video-embed">
+      <video controls preload="metadata" poster="moh-proof-poster.jpg">
+        <source src="moh-proof.mp4" type="video/mp4">
+        <source src="moh-proof.webm" type="video/webm">
+      </video>
+    </div>
+    <p class="rates-note" style="margin-top:14px;">Audio pulled directly from the mic, not a camera across the room — this is what "clean speech audio" actually sounds like.</p>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="eyebrow"><span class="l">// HOW IT WORKS</span><hr class="rule"></div>
+    <div class="steps">
+      <div class="step">
+        <div class="num mono">01</div>
+        <h3>Inquiry</h3>
+        <p>Send your date, venue, and what needs covering. I confirm availability and we work together to make sure nothing gets missed.</p>
+      </div>
+      <div class="step">
+        <div class="num mono">02</div>
+        <h3>Coordination</h3>
+        <p>I connect directly with your planner, DJ, and photographer ahead of time to line up timing and logistics — one less thing for you to manage.</p>
+      </div>
+      <div class="step">
+        <div class="num mono">03</div>
+        <h3>Day-of coverage</h3>
+        <p>Cameras and audio are set and synced before anything starts. I stay out of the way — no directing, no re-takes.</p>
+      </div>
+      <div class="step">
+        <div class="num mono">04</div>
+        <h3>Delivery</h3>
+        <p>Synced, edited multi-angle footage delivered as a digital download, typically within 1–2 weeks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rates" class="tight">
+  <div class="wrap">
+    <div class="eyebrow"><span class="l">// RATES</span><hr class="rule"></div>
+    <div class="rates">
+      <div class="rate-row">
+        <div class="desc">
+          <h4>Ceremony Only</h4>
+          <p>Multi-cam, synced audio, edited &amp; delivered</p>
+        </div>
+        <div class="price mono">$900–$1,500</div>
+      </div>
+      <div class="rate-row">
+        <div class="desc">
+          <h4>+ First Dance / Reception Add-On</h4>
+          <p>Extends coverage into the reception</p>
+        </div>
+        <div class="price mono">+$300–$600</div>
+      </div>
+    </div>
+    <p class="rates-note">Rates vary with hours on-site, number of cameras, and turnaround. Final quote sent after a quick call.</p>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Tell me about the date.</h2>
+    <p class="sub">Venue, timing, and what needs to be covered — I'll reply with availability and a quote.</p>
+    <form class="form" onsubmit="return false;">
+      <div>
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Your name">
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@email.com">
+      </div>
+      <div>
+        <label for="type">Coverage needed</label>
+        <select id="type">
+          <option>Ceremony only</option>
+          <option>Full coverage (+ reception)</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div>
+        <label for="date">Date &amp; venue</label>
+        <input id="date" type="text" placeholder="e.g. Oct 4, 2026 — Griffith Park">
+      </div>
+      <div>
+        <label for="notes">Notes</label>
+        <textarea id="notes" placeholder="Anything I should know"></textarea>
+      </div>
+      <a href="#" class="btn primary" style="width:fit-content;">Send inquiry</a>
+    </form>
+
+    <div class="foot-bottom">
+      <span>© 2026 Doug Lim Films · Los Angeles, CA</span>
+    </div>
+  </div>
+</footer>
+
+<button type="button" class="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+  // Hero video is the master clock; monitor-wall tiles are the same synced take at the
+  // same 18.42s length, so they follow it instead of looping on their own independent
+  // clocks (which would drift apart). Looping is handled manually here (no `loop` attr)
+  // so every tile restarts at frame 0 together instead of drifting and self-correcting.
+  (function () {
+    const hero = document.getElementById('hero-video');
+    const followers = [...document.querySelectorAll('.wall-cam-video')];
+    if (!hero || !followers.length) return;
+
+    function restartAll() {
+      [hero, ...followers].forEach(v => { v.currentTime = 0; });
+      [hero, ...followers].forEach(v => v.play().catch(() => {}));
+    }
+    hero.addEventListener('ended', restartAll);
+
+    function resync() {
+      if (hero.paused || !hero.duration) return;
+      followers.forEach(v => {
+        if (!v.paused && Math.abs(v.currentTime - hero.currentTime) > 0.12) {
+          v.currentTime = hero.currentTime;
+        }
+      });
+    }
+    hero.addEventListener('playing', resync);
+    setInterval(resync, 1500);
+  })();
+
+  // Timecode readout on the monitor wall follows each tile's real video currentTime,
+  // so it loops with the ~18s clips instead of counting up forever. AUD has no video
+  // of its own, so it mirrors CAM A's clock since all four are the same synced moment.
+  (function () {
+    const camEls = document.querySelectorAll('.wall .cam');
+    const syncVideo = document.querySelector('.wall video');
+    if (!syncVideo) return;
+
+    function formatTC(t) {
+      const h = String(Math.floor(t / 3600)).padStart(2, '0');
+      const m = String(Math.floor((t % 3600) / 60)).padStart(2, '0');
+      const s = String(Math.floor(t % 60)).padStart(2, '0');
+      const f = String(Math.floor((t % 1) * 24)).padStart(2, '0');
+      return `${h}:${m}:${s}:${f}`;
+    }
+
+    function updateTCs() {
+      camEls.forEach(cam => {
+        const video = cam.querySelector('video') || syncVideo;
+        const tc = cam.querySelector('[data-tc]');
+        if (tc) tc.textContent = formatTC(video.currentTime);
+      });
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      updateTCs();
+    } else {
+      setInterval(updateTCs, 100);
+    }
+  })();
+
+  // Fake scrolling waveform for the AUD monitor tile
+  const waveCanvas = document.querySelector('.aud-wave');
+  if (waveCanvas) {
+    const ctx = waveCanvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+    const barW = 3, gap = 2;
+    let bars = [];
+    let last = 0.3;
+
+    function resize() {
+      const rect = waveCanvas.getBoundingClientRect();
+      waveCanvas.width = Math.round(rect.width * dpr);
+      waveCanvas.height = Math.round(rect.height * dpr);
+      const count = Math.ceil(rect.width / (barW + gap)) + 2;
+      if (bars.length !== count) bars = Array.from({length: count}, () => Math.random() * 0.5);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function nextAmp() {
+      let v = last + (Math.random() - 0.5) * 0.6;
+      if (Math.random() < 0.08) v *= 0.3;
+      v = Math.max(0.06, Math.min(1, v));
+      last = v;
+      return v;
+    }
+
+    function draw() {
+      const w = waveCanvas.width, h = waveCanvas.height, mid = h / 2;
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = 'rgba(127,191,143,0.85)';
+      const bw = barW * dpr, gp = gap * dpr;
+      bars.forEach((amp, i) => {
+        const barH = Math.max(2 * dpr, amp * h * 0.8);
+        ctx.fillRect(i * (bw + gp), mid - barH / 2, bw, barH);
+      });
+    }
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      draw();
+    } else {
+      (function tick() {
+        bars.shift();
+        bars.push(nextAmp());
+        draw();
+        setTimeout(tick, 90);
+      })();
+    }
+  }
+
+  // On-board vs lav mic comparison: two independent boxes, each a single
+  // video file with its own real embedded audio (muxed via ffmpeg from the
+  // shared visual + the per-mic audio track — see README). Pressing one
+  // pauses the other and carries over its playback position, so switching
+  // mid-comparison still lines up on the same moment. Deliberately NOT
+  // continuous simultaneous playback (two elements always running, toggle
+  // by mute): that was tried, and rebuilt, more than once, and kept hitting
+  // real-device sync/stutter problems (see README "Hard-won lessons").
+  // Only one video is ever actually playing at a time here, which
+  // sidesteps that whole class of bug — at the cost of switching being a
+  // position-jump instead of an instant simultaneous toggle.
+  (function () {
+    const boxes = Array.from(document.querySelectorAll('.wa-box'));
+    if (!boxes.length) return;
+
+    const PLAY_PATH = 'M5.5,6 L5.5,18 Q5.5,20 7.2,18.95 L16.8,13.05 Q18.5,12 16.8,10.95 L7.2,5.05 Q5.5,4 5.5,6 Z';
+    const PAUSE_PATH = 'M6 5h4v14H6zM14 5h4v14h-4z';
+
+    const items = boxes.map(box => {
+      const video = box.querySelector('video');
+      const playBtn = box.querySelector('.wa-play');
+      const icon = box.querySelector('.wa-play-icon');
+      return { box, video, playBtn, icon };
+    });
+
+    function setIcon(item, isPlaying) {
+      item.icon.setAttribute('d', isPlaying ? PAUSE_PATH : PLAY_PATH);
+      item.playBtn.setAttribute('aria-label', (isPlaying ? 'Pause ' : 'Play ') + item.box.dataset.source + ' mic');
+      item.box.classList.toggle('playing', isPlaying);
+    }
+
+    items.forEach(item => {
+      item.playBtn.addEventListener('click', () => {
+        if (!item.video.paused) {
+          item.video.pause();
+          return;
+        }
+        // Starting this box: pause whichever other box is currently
+        // playing and carry over its exact position, so both boxes stay
+        // comparing the same moment even though only one plays at a time.
+        let pos = item.video.currentTime;
+        items.forEach(other => {
+          if (other !== item && !other.video.paused) {
+            pos = other.video.currentTime;
+            other.video.pause();
+          }
+        });
+        item.video.currentTime = pos;
+        item.video.play().catch(() => {});
+      });
+
+      item.video.addEventListener('play', () => setIcon(item, true));
+      item.video.addEventListener('pause', () => setIcon(item, false));
+      // Plays once, then stops — reset to the start while paused so the
+      // next click on this box begins a clean fresh playthrough.
+      item.video.addEventListener('ended', () => { item.video.currentTime = 0; });
+    });
+  })();
+
+  // Back-to-top button: fades in once scrolled past one viewport height,
+  // fades out near the top again. Respects reduced-motion for the scroll
+  // itself (jumps instantly instead of animating), consistent with how
+  // autoplay/animation is handled elsewhere on this page.
+  (function () {
+    const btn = document.querySelector('.back-to-top');
+    if (!btn) return;
+
+    function updateVisibility() {
+      btn.classList.toggle('visible', window.scrollY > window.innerHeight * 0.75);
+    }
+    window.addEventListener('scroll', updateVisibility, { passive: true });
+    updateVisibility();
+
+    btn.addEventListener('click', () => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  })();
+</script>
+
+</body>
+</html>
