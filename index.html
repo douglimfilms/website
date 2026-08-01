@@ -193,6 +193,10 @@
     border:1px solid var(--ink);
     color:var(--ink);
     background:transparent;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+    border-radius:0;
     transition:background .15s ease, color .15s ease;
   }
   .btn:hover, .btn:focus-visible{background:var(--ink); color:var(--white);}
@@ -743,18 +747,18 @@
   <div class="wrap">
     <h2>Tell me about the date.</h2>
     <p class="sub">Venue, timing, and what needs to be covered — I'll reply with availability and a quote.</p>
-    <form class="form" onsubmit="return false;">
+    <form class="form" action="https://formspree.io/f/xkodlzrb" method="POST">
       <div>
         <label for="name">Name</label>
-        <input id="name" type="text" placeholder="Your name">
+        <input id="name" name="name" type="text" placeholder="Your name" required>
       </div>
       <div>
         <label for="email">Email</label>
-        <input id="email" type="email" placeholder="you@email.com">
+        <input id="email" name="email" type="email" placeholder="you@email.com" required>
       </div>
       <div>
         <label for="type">Coverage needed</label>
-        <select id="type">
+        <select id="type" name="coverage needed">
           <option>Ceremony only</option>
           <option>Full coverage (+ reception)</option>
           <option>Not sure yet</option>
@@ -762,13 +766,14 @@
       </div>
       <div>
         <label for="date">Date &amp; venue</label>
-        <input id="date" type="text" placeholder="e.g. Oct 4, 2026 — Griffith Park">
+        <input id="date" name="date & venue" type="text" placeholder="e.g. Oct 4, 2026 — Griffith Park">
       </div>
       <div>
         <label for="notes">Notes</label>
-        <textarea id="notes" placeholder="Anything I should know"></textarea>
+        <textarea id="notes" name="notes" placeholder="Anything I should know"></textarea>
       </div>
-      <a href="#" class="btn primary" style="width:fit-content;">Send inquiry</a>
+      <input type="hidden" name="_subject" value="New inquiry from douglimfilms.com">
+      <button type="submit" class="btn primary" style="width:fit-content;">Send inquiry</button>
     </form>
 
     <div class="foot-bottom">
