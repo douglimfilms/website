@@ -482,6 +482,16 @@
     border-bottom-color:var(--tally);
   }
   .form textarea{resize:vertical; min-height:70px;}
+  .contact-status{
+    display:none;
+    margin:4px 0 0;
+    font-family:'Courier New', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size:13px;
+    letter-spacing:0.03em;
+  }
+  .contact-status.visible{display:block;}
+  .contact-status.success{color:var(--white);}
+  .contact-status.error{color:var(--tally);}
   .foot-bottom{
     margin-top:64px;
     padding-top:24px;
@@ -747,7 +757,7 @@
   <div class="wrap">
     <h2>Tell me about the date.</h2>
     <p class="sub">Venue, timing, and what needs to be covered — I'll reply with availability and a quote.</p>
-    <form class="form" action="https://formspree.io/f/xkodlzrb" method="POST">
+    <form id="contact-form" class="form" action="https://formspree.io/f/xkodlzrb" method="POST">
       <div>
         <label for="name">Name</label>
         <input id="name" name="name" type="text" placeholder="Your name" required>
@@ -774,6 +784,7 @@
       </div>
       <input type="hidden" name="_subject" value="New inquiry from douglimfilms.com">
       <button type="submit" class="btn primary" style="width:fit-content;">Send inquiry</button>
+      <p id="contact-status" class="contact-status" role="status" aria-live="polite"></p>
     </form>
 
     <div class="foot-bottom">
@@ -951,6 +962,43 @@
       // Plays once, then stops — reset to the start while paused so the
       // next click on this box begins a clean fresh playthrough.
       item.video.addEventListener('ended', () => { item.video.currentTime = 0; });
+    });
+  })();
+
+  // Contact form: submitted via fetch instead of a native POST, so a
+  // successful submission shows a status message right here instead of
+  // navigating away to Formspree's own generic "thank you" page.
+  (function () {
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('contact-status');
+    if (!form || !status) return;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      status.className = 'contact-status visible';
+      status.textContent = 'Sending...';
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(resp => {
+        if (resp.ok) {
+          form.reset();
+          status.className = 'contact-status visible success';
+          status.textContent = "Thanks — I'll get back to you soon.";
+        } else {
+          status.className = 'contact-status visible error';
+          status.textContent = 'Something went wrong — email doug.c.lim@gmail.com directly instead.';
+        }
+      }).catch(() => {
+        status.className = 'contact-status visible error';
+        status.textContent = 'Something went wrong — email doug.c.lim@gmail.com directly instead.';
+      }).finally(() => {
+        submitBtn.disabled = false;
+      });
     });
   })();
 
