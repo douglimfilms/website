@@ -2,6 +2,15 @@
 
 Static one-page site for a documentary-style, multi-camera wedding videography side business (LA-based), run under the videographer's own name. Positioning: real audio + multi-angle coverage, explicitly NOT cinematic/staged wedding videography.
 
+## Current state (as of Aug 1, 2026)
+Read this first — it's the fast-orientation summary; everything below is the detailed history/reasoning behind it.
+- **Live at** `https://www.douglimfilms.com` and `https://douglimfilms.com` (both serve the site directly, no redirect between them) — hosted on **Cloudflare Workers** (static assets, not a server), auto-deploying from the `main` branch of `github.com/douglimfilms/website` on every push.
+- **Deploy workflow:** edit files in `field-coverage-site/` (this folder, the working/source copy — never itself deployed), copy the changed ones into the sibling `deploy/` folder, then from `deploy/` run `git add -A && git commit -m "..."` and `git push`. Full details, including auth, under "Deployment" below.
+- **Contact form works** — submits via `fetch()` to Formspree, forwards to `doug.c.lim@gmail.com`, shows an inline "Thanks" message with no page redirect.
+- **The A/B mic-comparison section (`#difference`) is two independent boxes** ("ON-BOARD MIC" / "LAV MIC"), each a real video+audio file. Press one, the other stops and hands off position. This is the *third* rebuild of this feature after two earlier architectures hit real mobile-device bugs — see "Hard-won lessons" under "Known decisions" before changing it again.
+- **Nothing major is known-pending** as of this note. One old, easy-to-forget gap: an "auto-stop after 2 loops" feature was requested early on, then lost in a later architecture rewrite and never rebuilt — mention it to the user if it comes up.
+- **This file is the project's actual persistent memory** — more reliable than any single conversation's context window. Read it fully before making non-trivial changes.
+
 **Business renamed from "Field Coverage" to "Doug Lim Docs," then to "Doug Lim Films."** Reasoning for dropping "Field Coverage": personal-name branding builds more trust for a solo wedding videographer than an abstract company name (couples want to know *who* is shooting their day) — "Field Coverage" read more like a journalism/broadcast outfit and never actually evoked weddings. "Doug Lim Media" was considered and rejected at that point: the domain (`douglimmedia.com`) has an awkward double-M letter collision where "Lim" meets "Media." "Docs" was chosen next — collision-free as a domain (`douglimdocs.com`, confirmed available), and it reinforced "documentary-style," the differentiator. **"Docs" was then dropped after real-world feedback: people didn't like it** (read as paperwork/"docks," not evocative of video) — renamed again to "Doug Lim Films," a plain, unambiguous genre term with no collision risk and no confusing double meaning. Renamed in `index.html`: `<title>`, `.brand` nav text, and the footer copyright line — check all three if renaming again.
 
 ## Files
