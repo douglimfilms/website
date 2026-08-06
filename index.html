@@ -131,42 +131,37 @@
     overflow: hidden;
     box-shadow: var(--shadow);
     background-color: var(--bg-raised);
-    background-image: url("hero-desktop.jpg?v=4");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+    background-image:
+      linear-gradient(100deg, rgba(15, 10, 6, 0.6) 0%, rgba(15, 10, 6, 0.38) 24%, rgba(15, 10, 6, 0.12) 42%, rgba(15, 10, 6, 0) 58%),
+      url("hero-desktop.jpg?v=5");
+    background-size: 100% 100%, cover;
+    background-position: center center, center center;
+    background-repeat: no-repeat, no-repeat;
   }
 
-  .hero-cta {
+  .hero-text {
     position: absolute;
-    left: clamp(16px, 3vw, 28px);
-    bottom: clamp(16px, 3vw, 28px);
+    left: clamp(20px, 4vw, 44px);
+    bottom: clamp(18px, 3.5vw, 32px);
+    max-width: min(300px, 46%);
+    z-index: 2;
+  }
+  .headline-overlay {
+    color: #fdf9f0;
+    text-shadow: 0 2px 18px rgba(20, 14, 8, 0.55), 0 1px 4px rgba(20, 14, 8, 0.65);
+    font-size: clamp(17px, 2vw, 24px);
+    line-height: 1.2;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
   }
 
-  .hero-copy {
-    max-width: 720px;
-    margin: clamp(36px, 6vw, 56px) auto 0;
-    text-align: center;
-  }
   .eyebrow {
     font-size: 12px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent-strong);
     margin: 0 0 16px;
-  }
-  .headline {
-    font-size: clamp(32px, 5vw, 54px);
-    line-height: 1.08;
-    margin: 0 0 18px;
-    letter-spacing: -0.01em;
-  }
-  .subhead {
-    font-size: clamp(16px, 2vw, 19px);
-    line-height: 1.55;
-    color: var(--ink-soft);
-    margin: 0 auto clamp(28px, 4vw, 36px);
-    max-width: 46ch;
   }
 
   .cta {
@@ -185,6 +180,8 @@
   }
   .cta:hover, .cta:focus-visible { background: var(--accent-strong); transform: translateY(-1px); }
   .cta svg { width: 14px; height: 14px; }
+  .cta-sm { padding: 7px 14px; font-size: 10px; letter-spacing: 0.03em; gap: 6px; white-space: nowrap; }
+  .cta-sm svg { width: 10px; height: 10px; }
 
   /* ---------- Pricing ---------- */
   .pricing {
@@ -306,7 +303,9 @@
     .consult-grid { padding-left: 28px; padding-right: 28px; }
     .hero-photo {
       aspect-ratio: 4 / 3;
-      background-image: url("hero-mobile.jpg?v=4");
+      background-image:
+        linear-gradient(100deg, rgba(15, 10, 6, 0.6) 0%, rgba(15, 10, 6, 0.38) 24%, rgba(15, 10, 6, 0.12) 42%, rgba(15, 10, 6, 0) 58%),
+        url("hero-mobile.jpg?v=5");
     }
   }
 
@@ -475,23 +474,17 @@
 <header class="site-header">
   <nav class="wrap site">
     <a class="wordmark" href="#top">Doug Lim <em>Films</em></a>
-    <a class="nav-link" href="#consultation">Book a Consultation</a>
+    <a class="nav-link" href="#consultation">Book a Call</a>
   </nav>
 </header>
 
 <main id="top">
   <section class="hero wrap">
-    <div class="hero-photo" role="img" aria-label="Couple sharing a kiss at night on the steps beneath a grand illuminated archway">
-      <a class="cta hero-cta" href="#consultation">
-        Book a Consultation
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-    </div>
-
-    <div class="hero-copy">
-      <p class="eyebrow">Los Angeles Wedding Videography</p>
-      <h1 class="headline display">Your wedding day captured authentically.</h1>
-      <p class="subhead">High-quality wedding documentation that is affordable.</p>
+    <div class="hero-photo" role="img" aria-label="Bride and groom smiling at each other at night in front of the City Hall archway">
+      <div class="hero-text">
+        <h1 class="headline-overlay display">Your wedding day captured authentically.</h1>
+        <a class="cta cta-sm" href="#consultation">Book a Call</a>
+      </div>
     </div>
   </section>
 
@@ -566,7 +559,7 @@
   <section class="consult" id="consultation">
     <div class="wrap consult-grid">
       <div>
-        <p class="eyebrow">Book a Consultation</p>
+        <p class="eyebrow">Book a Call</p>
         <h2 class="consult-heading display">Tell me about your date.</h2>
         <p class="consult-sub">Venue, timing, and what needs to be covered — I'll reply with availability and a quote.</p>
       </div>
